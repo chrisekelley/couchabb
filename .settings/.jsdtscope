@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="_attachments/js/main.js"/>
+	<classpathentry kind="lib" path="_attachments/js/libs/backbone/backbone-min.js"/>
+	<classpathentry kind="lib" path="_attachments/js/libs/backbone-couchdb/backbone-couchdb.js"/>
+	<classpathentry kind="lib" path="_attachments/js/vm.js"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
