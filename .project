@@ -3,6 +3,7 @@
 	<name>couchabb</name>
 	<comment></comment>
 	<projects>
+		<project>todomvc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

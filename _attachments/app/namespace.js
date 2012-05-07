@@ -3,7 +3,7 @@ define([
   "jquery",
   "use!underscore",
   "use!backbone",
-  "use!backbone_couchdb"
+  //"use!backbone_couchdb"
 ],
 
 function($, _, Backbone) {
