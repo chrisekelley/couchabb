@@ -4,10 +4,10 @@ require([
   // Libs
   "jquery",
   "use!backbone",
-  //"use!backbone_couchdb",
+  "use!backbone_couchdb",
 
   // Modules
-  "modules/example",
+  //"modules/example",
   "modules/todo"
 ],
 
@@ -16,15 +16,18 @@ function(namespace, $, Backbone, Example, Todo) {
   var Router = Backbone.Router.extend({
     routes: {
       "": "index",
-      ":hash": "index",
-      ":tutorial": "tutorial"
+      ":hash": "index"
+      //":tutorial": "tutorial"
       //"/": "index",
       //"couchabb/_design/couchabb/index.html": "index"
     },
 
     index: function(hash) {
     	var route = this;
-    	
+    	//** Configure the database **//
+    	Backbone.couch_connector.config.db_name = "couchabb";
+    	Backbone.couch_connector.config.ddoc_name = "couchabb";
+    	//Backbone.couch_connector.config.base_url = "http://localhost:5984";
     	// Fetch the template, render it to the View element and call done.
     	namespace.fetchTemplate("app/templates/todomvc.html", function(tmpl) {
     		var htmlText = tmpl();

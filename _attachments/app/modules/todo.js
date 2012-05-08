@@ -3,12 +3,12 @@ define([
 
   // Libs
   "use!backbone",
-  //"use!backbone_couchdb",
+  "use!backbone_couchdb"
 
   // Modules
 
   // Plugins
-  "use!localstorage"
+  //"use!localstorage"
 ],
 
 function(namespace, Backbone) {
@@ -51,7 +51,7 @@ function(namespace, Backbone) {
 	    model: Todo.Model,
 
 	    // Save all of the todo items under the `"todos"` namespace.
-	    localStorage: new Store("Todos"),
+	    //localStorage: new Store("Todos"),
 
 	    // Filter down the list of all todo items that are finished.
 	    done: function() {
@@ -73,7 +73,8 @@ function(namespace, Backbone) {
 	    // Todos are sorted by their original insertion order.
 	    comparator: function(todo) {
 	      return todo.get('order');
-	    }
+	    },
+	    url : "/todo",
 	  });
   Todo.TodoCollection = new Todo.TodoCollection({model: new Todo.Model()});
   //Todo.TodoCollection = new Todo.TodoCollection({ model:new Todo()});

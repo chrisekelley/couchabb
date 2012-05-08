@@ -12,13 +12,13 @@ require.config({
     jquery: "../assets/js/libs/jquery",
     underscore: "../assets/js/libs/underscore",
     backbone: "../assets/js/libs/backbone-full",
-    //backbone_couchdb: "../assets/js/libs/backbone-couchdb", // https://github.com/janmonschke/backbone-couchdb
+    backbone_couchdb: "../assets/js/libs/backbone-couchdb", // https://github.com/janmonschke/backbone-couchdb
     jquery_couch: "../assets/js/libs/jquery.couch",
     // Shim Plugin
     use: "../assets/js/plugins/use",
     // todomvc
-    text: "../assets/js/plugins/text",
-    localstorage:  "../assets/js/plugins/backbone-localstorage"
+    text: "../assets/js/plugins/text"
+    //localstorage:  "../assets/js/plugins/backbone-localstorage"
   },
 
   use: {
@@ -30,15 +30,15 @@ require.config({
     underscore: {
       attach: "_"
     },
-    /*backbone_couchdb: {
+    backbone_couchdb: {
     	deps: ["use!underscore", "jquery","use!backbone", "use!jquery_couch"]
-    },*/
+    },
     jquery_couch: {
     	deps: ["jquery"]
     	//$.couch
-    },
-    localstorage: {
-    	deps: ["use!underscore","use!backbone"]
     }
+    /*localstorage: {
+    	deps: ["use!underscore","use!backbone"]
+    }*/
   }
 });
