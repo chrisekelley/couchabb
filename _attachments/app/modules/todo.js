@@ -123,8 +123,6 @@ function(namespace, Backbone) {
 
     	var todosDone = Todo.TodoCollection.done().length;
     	var remaining = Todo.TodoCollection.remaining().length;
-    	console.log("todosDone: " + todosDone);
-    	console.log("remaining: " + remaining);
     	/*this.$('#todo-stats').html(this.statsTemplate({
         total:      Todo.TodoCollection.length,
         done:       todosDone,
@@ -137,7 +135,7 @@ function(namespace, Backbone) {
     	        remaining:  remaining
     	      };
     		var htmltext = tmpl2(statsjson);
-    		console.log(JSON.stringify(htmltext));
+    		//(JSON.stringify(htmltext));
     		//view.statsEl = view.$('#todo-stats');
     		$('#todo-stats').html(htmltext);
     	});
@@ -145,14 +143,11 @@ function(namespace, Backbone) {
     	// If a done function is passed, call it with the element
 		if (_.isFunction(done)) {
 			done(view.el);
-			console.log("after done. ");
 			view.input    = view.$("#new-todo");
 			view.allCheckbox = view.$(".mark-all-done")[0];
 			//view.allCheckbox.checked = !remaining;
 		}
-		console.log("before view.addAll");
 		//view.addAll();
-
     }, 
     
 
@@ -162,7 +157,7 @@ function(namespace, Backbone) {
       var view = new Todo.Views.TodoItem({model: todo});
       //var todoItemEl = view.render().el;
       //this.$("#todo-list").append(todoItemEl);
-      console.log("add one: " + JSON.stringify(todo));
+      //console.log("add one: " + JSON.stringify(todo));
       view.render(function(el) {
           $('#todo-list').append(el);
         });
@@ -193,7 +188,6 @@ function(namespace, Backbone) {
 
     // Clear all done todo items, destroying their models.
     clearCompleted: function() {
-    	console.log("clear clearCompleted");
       _.each(Todo.TodoCollection.done(), function(todo){ todo.clear(); });
       return false;
     },
@@ -262,7 +256,7 @@ function(namespace, Backbone) {
 	    		if (_.isFunction(done)) {
 	    			done(view.el);
 	    		}
-	    		console.log("first return of " + JSON.stringify(json));
+	    		//console.log("first return of " + JSON.stringify(json));
 	    		//return view.el;
 	    	});
 	    	//console.log("second return of " + JSON.stringify(json));
@@ -293,7 +287,6 @@ function(namespace, Backbone) {
 
 	    // Remove the item, destroy the model.
 	    clear: function() {
-	    	console.log("clear model");
 	    	this.model.clear();
 	    }
 
