@@ -207,7 +207,7 @@ td { vertical-align: top; }
    ========================================================================== */
 
 #main {
-  margin: 40px;
+/*   margin: 40px; */
   font-size: 14px;
 }
 
@@ -336,10 +336,10 @@ body {
 }
 
 #todoapp {
-	width: 480px;
+/* 	width: 400px; */
 	margin: 0 auto 40px;
 	background: white;
-	padding: 20px;
+	padding: 5px;
 	-moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
 	-o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
@@ -357,7 +357,7 @@ body {
 	position: relative;
 }
 #create-todo input {
-	width: 466px;
+	width: 95%;
 	font-size: 24px;
 	font-family: inherit;
 	line-height: 1.4em;
@@ -409,7 +409,7 @@ body {
 	display: block;
 }
 #todo-list .editing input {
-	width: 444px;
+	width: 95%;
 	font-size: 24px;
 	font-family: inherit;
 	margin: 0;
@@ -496,7 +496,7 @@ body {
 }
 
 #credits {
-	width: 520px;
+/* 	width: 520px; */
 	margin: 30px auto;
 	color: #999;
 	text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
@@ -691,7 +691,7 @@ body {
 /* line 67 */
 #todoapp .content ul#todo-list li.editing .todo-input {
 	display: block;
-	width: 466px;
+	width: 95%;
 	font-size: 24px;
 	font-family: inherit;
 	line-height: 1.4em;
