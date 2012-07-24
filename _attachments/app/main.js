@@ -25,16 +25,96 @@ function(namespace, $, Backbone, Example, Todo) {
     index: function(hash) {
     	var route = this;
     	//** Configure the database **//
+    	FORMY.SyncpointLocalDb = null;
     	Backbone.couch_connector.config.db_name = "couchabb";
     	Backbone.couch_connector.config.ddoc_name = "couchabb";
-    	//Backbone.couch_connector.config.base_url = "http://localhost:5984";
-    	// Fetch the template, render it to the View element and call done.
-    	namespace.fetchTemplate("app/templates/todomvc.html", function(tmpl) {
-    		var htmlText = tmpl();
-    		//this.$("#main").innerHTML = htmlText;
-    		this.$("#main").html(htmlText);
-    		console.log("rendered index template. ");
-    		/*var todosDone = Todo.TodoCollection.done().length;
+	    console.log("Init of Backbone.couch_connector.config.db_name: " + Backbone.couch_connector.config.ddoc_name);
+	    //$.when( findSyncpointLocalDb() ).then(
+	    
+	    var id = null;
+		  var local_db_name = null;
+		  var jqxhr = $.getJSON('/sp_control/_design/control/_view/by_type?key=%22installation%22', function(data) { 
+			  var record = null;
+			  $.each(data, function(key, val) {
+				  if (key == "rows") {
+					  record = val;
+					  id = record[0].id;
+					  console.log("id: " + id);
+				  }
+			  }
+			  );
+		  }).complete(
+				  function() {
+				  /*if (record != null) {
+						  //console.log("record: " + JSON.stringify(record));
+						  console.log("id: " + id);*/
+				  $.getJSON('/sp_control/' + id, function(data) {
+					  //console.log("data: " + JSON.stringify(data));
+					  local_db_name = data.local_db_name;
+					  FORMY.SyncpointLocalDb = local_db_name;
+					  console.log("local_db_name: " + FORMY.SyncpointLocalDb);
+					  Backbone.couch_connector.config.db_name = FORMY.SyncpointLocalDb;
+					  console.log("Backbone.couch_connector.config.db_name: " + FORMY.SyncpointLocalDb);
+					  //return dfd.promise();
+				  });
+				  }
+				  /*} else {
+						  console.log("Syncpoint setup incomplete: Backbone.couch_connector.config.db_name: " + Backbone.couch_connector.config.db_name);
+						  Backbone.couch_connector.config.db_name = "couchabb";
+					  }*/
+		  );
+	    
+	    
+	    //$.when(findSyncpointLocalDb().deferred.done).then(
+		  jqxhr.complete(
+				  function() {
+	    		// Fetch the template, render it to the View element and call done.
+	    		namespace.fetchTemplate("app/templates/todomvc.html", function(tmpl) {
+	    			console.log("we can proceed now: " + Backbone.couch_connector.config.db_name);
+	    			var htmlText = tmpl();
+	    			//this.$("#main").innerHTML = htmlText;
+	    			this.$("#main").html(htmlText);
+	    			console.log("rendered index template. ");
+	    			var todoView = new Todo.Views.Todomvc();
+	    			todoView.render(
+	    					function(el){
+	    						//$("#main").html(el);
+	    						//Todo.TodoCollection.fetch();
+	    						// Fix for hashes in pushState and hash fragment
+	    						if (hash && !route._alreadyTriggered) {
+	    							// Reset to home, pushState support automatically converts hashes
+	    							Backbone.history.navigate("", false);
+	    							// Trigger the default browser behavior
+	    							location.hash = hash;
+	    							// Set an internal flag to stop recursive looping
+	    							route._alreadyTriggered = true;
+	    						}
+	    					});
+	    		});
+				  }
+	    );
+	    
+		 
+				  
+				  /*if (FORMY.SyncpointLocalDb != null) {
+    		console.log("FORMY.SyncpointLocalDb: " + FORMY.SyncpointLocalDb);
+    		Backbone.couch_connector.config.db_name = FORMY.SyncpointLocalDb;
+    	} else {
+    		console.log("Backbone.couch_connector.config.db_name: couchabb");
+    		Backbone.couch_connector.config.db_name = "couchabb";
+    	}*/
+				  //Backbone.couch_connector.config.db_name = "couchabb";
+				  //Backbone.couch_connector.config.ddoc_name = "couchabb";
+
+				  //Backbone.couch_connector.config.base_url = "http://localhost:5984";
+				  // Fetch the template, render it to the View element and call done.
+				/*  namespace.fetchTemplate("app/templates/todomvc.html", function(tmpl) {
+					  console.log("we can proceed now: " + Backbone.couch_connector.config.db_name);
+					  var htmlText = tmpl();
+					  //this.$("#main").innerHTML = htmlText;
+					  this.$("#main").html(htmlText);
+					  console.log("rendered index template. ");*/
+					  /*var todosDone = Todo.TodoCollection.done().length;
         	var remaining = Todo.TodoCollection.remaining().length;
         	namespace.fetchTemplate("app/templates/stats.html", function(tmpl2) {
         		var statsjson = {
@@ -47,28 +127,24 @@ function(namespace, $, Backbone, Example, Todo) {
         		//view.statsEl = view.$('#todo-stats');
         		$('#todo-stats').html(htmltext);
         	});*/
-    		
-        	var todoView = new Todo.Views.Todomvc();
-        	todoView.render(
-        			function(el){
-        				//$("#main").html(el);
-        				//Todo.TodoCollection.fetch();
-        				// Fix for hashes in pushState and hash fragment
-        				if (hash && !route._alreadyTriggered) {
-        					// Reset to home, pushState support automatically converts hashes
-        					Backbone.history.navigate("", false);
-        					// Trigger the default browser behavior
-        					location.hash = hash;
-        					// Set an internal flag to stop recursive looping
-        					route._alreadyTriggered = true;
-        				}
-        			});
-
-    		
-    	});
-    	
-
-
+/*
+					  var todoView = new Todo.Views.Todomvc();
+					  todoView.render(
+							  function(el){
+								  //$("#main").html(el);
+								  //Todo.TodoCollection.fetch();
+								  // Fix for hashes in pushState and hash fragment
+								  if (hash && !route._alreadyTriggered) {
+									  // Reset to home, pushState support automatically converts hashes
+									  Backbone.history.navigate("", false);
+									  // Trigger the default browser behavior
+									  location.hash = hash;
+									  // Set an internal flag to stop recursive looping
+									  route._alreadyTriggered = true;
+								  }
+							  });
+				  })*/
+		 // );   
     },
     /*tutorial: function(hash) {
     	*//** Configure the database **//*
@@ -183,5 +259,49 @@ function(namespace, $, Backbone, Example, Todo) {
       Backbone.history.navigate(href, true);
     }
   });
+  
+  var FORMY = {};
+  function findSyncpointLocalDb() {
+	  //var dfd = new jQuery.Deferred();
+	  var id = null;
+	  var local_db_name = null;
+	  var jqxhr = $.getJSON('/sp_control/_design/control/_view/by_type?key=%22installation%22', function(data) { 
+		  var record = null;
+		  $.each(data, function(key, val) {
+			  if (key == "rows") {
+				  record = val;
+				  id = record[0].id;
+				  console.log("id: " + id);
+			  }
+		  }
+		  );
+	  }).complete(
+			  function() {
+			  /*if (record != null) {
+					  //console.log("record: " + JSON.stringify(record));
+					  console.log("id: " + id);*/
+			  $.getJSON('/sp_control/' + id, function(data) {
+				  //console.log("data: " + JSON.stringify(data));
+				  local_db_name = data.local_db_name;
+				  FORMY.SyncpointLocalDb = local_db_name;
+				  console.log("local_db_name: " + FORMY.SyncpointLocalDb);
+				  Backbone.couch_connector.config.db_name = FORMY.SyncpointLocalDb;
+				  console.log("Backbone.couch_connector.config.db_name: " + FORMY.SyncpointLocalDb);
+				  //return dfd.promise();
+			  });
+			  }
+			  /*} else {
+					  console.log("Syncpoint setup incomplete: Backbone.couch_connector.config.db_name: " + Backbone.couch_connector.config.db_name);
+					  Backbone.couch_connector.config.db_name = "couchabb";
+				  }*/
+	  );
+	  //console.log("after if/else: Backbone.couch_connector.config.db_name: " + Backbone.couch_connector.config.db_name);
+	  //})
+
+	  /*  .error(
+			  console.log("Syncpoint not setup: Backbone.couch_connector.config.db_name: " + Backbone.couch_connector.config.db_name)
+	  );*/
+	  return jqxhr;
+  }
 
 });

@@ -17,8 +17,9 @@ require.config({
     // Shim Plugin
     use: "../assets/js/plugins/use",
     // todomvc
-    text: "../assets/js/plugins/text"
+    text: "../assets/js/plugins/text",
     //localstorage:  "../assets/js/plugins/backbone-localstorage"
+    syncpoint: "../assets/js/libs/syncpoint-utils"
   },
 
   use: {
