@@ -1,4 +1,5 @@
-// Set the require.js configuration for your application.
+
+	// Set the require.js configuration for your application.
 require.config({
   // Initialize the application with the main application file
   deps: ["main"],
@@ -19,7 +20,8 @@ require.config({
     // todomvc
     text: "../assets/js/plugins/text",
     //localstorage:  "../assets/js/plugins/backbone-localstorage"
-    syncpoint: "../assets/js/libs/syncpoint-utils"
+    syncpoint: "../assets/js/libs/syncpoint-utils",
+    Cordova: "../assets/js/libs/cordova-2.0.0"
   },
 
   use: {
