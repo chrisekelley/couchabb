@@ -66,7 +66,7 @@ function(namespace, $, Backbone, Example, Todo) {
 								//return dfd.promise();
 							}).complete(
 									function() {
-										loadWebpage();
+										loadWebpage(hash);
 									}
 							); 
 						}
@@ -76,7 +76,7 @@ function(namespace, $, Backbone, Example, Todo) {
 						  }*/
 				);
 			} else {
-				loadWebpage();
+				loadWebpage(hash);
 			}
 			
 		},
@@ -98,7 +98,6 @@ function(namespace, $, Backbone, Example, Todo) {
     docUrl = docUrl.split("/");
     docUrl = docUrl.slice(3, 4);
     console.log("docUrl: " + docUrl + " document.URL: " + document.URL);
-    alert("docUrl: " + docUrl);
     Backbone.history.start({ pushState: true, root: "/" + docUrl + "/_design/couchabb/index.html" });
   });
 
@@ -126,7 +125,7 @@ function(namespace, $, Backbone, Example, Todo) {
   
   var FORMY = {};
   
-  function loadWebpage() {
+  function loadWebpage(hash) {
 	  // Fetch the template, render it to the View element and call done.
 	  namespace.fetchTemplate("app/templates/todomvc.html", function(tmpl) {
 		  console.log("we can proceed now: " + Backbone.couch_connector.config.db_name);
