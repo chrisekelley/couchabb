@@ -115,7 +115,7 @@ function(namespace, Backbone) {
       Todo.TodoCollection.bind('add',     this.addOne);
       Todo.TodoCollection.bind('reset',   this.addAll);
       Todo.TodoCollection.bind('all',     this.render);
-      Todo.TodoCollection.fetch();
+      Todo.TodoCollection.fetch({error: function() { console.log(arguments); }});
       //this.collection = Todo.TodoCollection;
     },
     render: function(done) {
@@ -139,6 +139,7 @@ function(namespace, Backbone) {
     		//view.statsEl = view.$('#todo-stats');
     		$('#todo-stats').html(htmltext);
     	});
+    	console.log("rendering: ");
 
     	// If a done function is passed, call it with the element
 		if (_.isFunction(done)) {
@@ -157,7 +158,8 @@ function(namespace, Backbone) {
       var view = new Todo.Views.TodoItem({model: todo});
       //var todoItemEl = view.render().el;
       //this.$("#todo-list").append(todoItemEl);
-      //console.log("add one: " + JSON.stringify(todo));
+      console.log("add one: " + JSON.stringify(todo));
+      console.log("length: " + Todo.TodoCollection.length);
       view.render(function(el) {
           $('#todo-list').append(el);
         });
@@ -165,6 +167,8 @@ function(namespace, Backbone) {
 
     // Add all items in the **Todo.TodoCollection** collection at once.
     addAll: function() {
+    	console.log(this.cid)
+    	console.log("addAll length: " + Todo.TodoCollection.length);
       Todo.TodoCollection.each(this.addOne);
     },
 
@@ -190,6 +194,19 @@ function(namespace, Backbone) {
     clearCompleted: function() {
       _.each(Todo.TodoCollection.done(), function(todo){ todo.clear(); });
       return false;
+    },
+    
+    // Clear all  todo items, destroying their models.
+    clearAll: function() {
+      Todo.TodoCollection.each(function (todo) { console.log("clearing" + todo.content);todo.clear(); });
+    },
+    // Clear all  todo items, destroying their models.
+    listAll: function() {
+    	//Todo.TodoCollection.each(function (todo) { console.log("listing: " + JSON.stringify(todo)); });
+    	var listItems =  $('#todo-list');
+    	listItems.empty();
+    	//console.log("listItems: " + listItems);
+    	//_.each(listItems, iterator, [context]) 
     },
 
     // Lazily show the tooltip that tells you to press `enter` to save

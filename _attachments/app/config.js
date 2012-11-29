@@ -10,7 +10,8 @@ require.config({
     plugins: "../assets/js/plugins",
 
     // Libraries
-    jquery: "../assets/js/libs/jquery",
+    jquery: "../assets/js/libs/jquery-1.8.2.min",
+    //jquery: "../assets/js/libs/jquery",
     underscore: "../assets/js/libs/underscore",
     backbone: "../assets/js/libs/backbone-full",
     backbone_couchdb: "../assets/js/libs/backbone-couchdb", // https://github.com/janmonschke/backbone-couchdb
@@ -21,7 +22,8 @@ require.config({
     text: "../assets/js/plugins/text",
     //localstorage:  "../assets/js/plugins/backbone-localstorage"
     syncpoint: "../assets/js/libs/syncpoint-utils",
-    Cordova: "../assets/js/libs/cordova-2.0.0"
+    Cordova: "../assets/js/libs/cordova-2.0.0",
+    base64: "../assets/js/libs/jquery.base64.min"
   },
 
   use: {
@@ -32,6 +34,10 @@ require.config({
 
     underscore: {
       attach: "_"
+    },
+    base64: {
+    	deps: ["jquery"],
+    	attach: "base64"
     },
     backbone_couchdb: {
     	deps: ["use!underscore", "jquery","use!backbone", "use!jquery_couch"]
