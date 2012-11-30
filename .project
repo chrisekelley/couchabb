@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>todos4all</name>
+	<name>couchabb</name>
 	<comment></comment>
 	<projects>
-		<project>todos4all</project>
+		<project>todomvc</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
